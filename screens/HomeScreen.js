@@ -30,14 +30,16 @@ const HomeScreen = ({ navigation }) => {
         <Picker.Item label="Medium" value="medium" />
         <Picker.Item label="Hard" value="hard" />
       </Picker>
-      <Picker
-        selectedValue={selectedCategory}
-        onValueChange={(itemValue) => setSelectedCategory(itemValue)}
-      >
-        {categories.map(category => (
-          <Picker.Item key={category.id} label={category.name} value={category.id.toString()} />
-        ))}
-      </Picker>
+      {categories.length > 0 && (
+        <Picker
+          selectedValue={selectedCategory}
+          onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+        >
+          {categories.map(category => (
+            <Picker.Item key={category.id} label={category.name} value={category.id.toString()} />
+          ))}
+        </Picker>
+      )}
       <Button title="Start Quiz" onPress={startQuiz} />
     </View>
   );
