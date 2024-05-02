@@ -99,34 +99,39 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#f0f0f0', 
   },
   score: {
-    fontSize: 18,
+    fontSize: 20, 
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 15, 
+    textAlign: 'center', 
   },
   category: {
-    fontSize: 16,
+    fontSize: 18, 
     marginBottom: 10,
+    textAlign: 'center',
   },
   difficulty: {
-    fontSize: 16,
+    fontSize: 18, 
     marginBottom: 20,
+    textAlign: 'center', 
   },
   questionContainer: {
     alignItems: 'center',
   },
   question: {
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 20,
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#007bff', 
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    marginBottom: 10,
+    marginBottom: 15,
+    width: '100%', 
   },
   buttonText: {
     color: '#fff',
@@ -134,10 +139,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   questionCount: {
-    fontSize: 16,
-    marginBottom: 10,
+    fontSize: 18,
+    marginBottom: 15, 
     fontWeight: 'bold',
+    textAlign: 'center',
   }  
 });
+
 
 export default QuizScreen;
