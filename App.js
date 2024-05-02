@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import WelcomeScreen from './screens/WelcomeScreen';
 import HomeScreen from './screens/HomeScreen';
 import QuizzScreen from './screens/QuizzScreen';
 
@@ -10,8 +11,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Quiz" component={QuizzScreen} />
+        <Stack.Screen name="Quizz" component={QuizzScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

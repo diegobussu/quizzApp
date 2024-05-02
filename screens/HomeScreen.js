@@ -16,13 +16,13 @@ const HomeScreen = ({ navigation }) => {
       .catch(error => console.error('Error fetching categories:', error));
   }, []);
 
-  const startQuiz = () => {
-    navigation.navigate('Quiz', { difficulty, category: selectedCategory });
+  const startQuizz = () => {
+    navigation.navigate('Quizz', { difficulty, category: selectedCategory });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Choose Difficulty:</Text>
+      <Text style={styles.title}>Choose Difficulty :</Text>
       <Picker
         style={styles.picker}
         selectedValue={difficulty}
@@ -34,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
       </Picker>
       {categories.length > 0 && (
         <>
-          <Text style={styles.title}>Choose Category:</Text>
+          <Text style={styles.title}>Choose Category :</Text>
           <Picker
             style={styles.picker}
             selectedValue={selectedCategory}
@@ -46,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
           </Picker>
         </>
       )}
-      <Button title="Start Quiz" onPress={startQuiz} />
+      <Button title="Start Quiz" onPress={startQuizz} />
     </View>
   );
 };
