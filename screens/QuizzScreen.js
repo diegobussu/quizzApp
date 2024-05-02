@@ -19,7 +19,7 @@ const QuizScreen = ({ route, navigation }) => {
   }, [category]);
 
   useEffect(() => {
-    fetch(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=10&encode=url3986&category=${category}&difficulty=${difficulty}&type=multiple`)
       .then(response => response.json())
       .then(data => {
         const decodedQuestions = data.results.map(question => {
