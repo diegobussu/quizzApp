@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const HomeScreen = ({ navigation }) => {
@@ -47,7 +47,9 @@ const HomeScreen = ({ navigation }) => {
           </Picker>
         </>
       )}
-      <Button title="Start Quizz" onPress={startQuizz} />
+      <TouchableOpacity style={styles.button} onPress={startQuizz}>
+        <Text style={styles.buttonText}>Start Quizz</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -67,6 +69,17 @@ const styles = StyleSheet.create({
   picker: {
     width: '100%',
     marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#000',
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 20,
+    textAlign: 'center',
   },
 });
 
