@@ -28,13 +28,12 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
   },
   container: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingBottom: 40,
   },
   backgroundImage: {
     flex: 1,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: 'bold',
     marginBottom: 20,
     color: '#fff',
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 24, 
     marginBottom: 30,
     color: '#fff',
     textAlign: 'center',
@@ -61,14 +60,16 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#007bff', 
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingVertical: 15,
+    elevation: 2, 
+    marginBottom: 20, 
   },
   buttonText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 24,
     textAlign: 'center',
   },
 });

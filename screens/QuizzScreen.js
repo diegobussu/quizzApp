@@ -18,23 +18,33 @@ const QuizScreen = ({ route, navigation }) => {
       .catch(error => console.error('Error : ', error));
   }, [category]);
 
+  
   useEffect(() => {
     fetch(`https://opentdb.com/api.php?amount=10&encode=url3986&category=${category}&difficulty=${difficulty}&type=multiple`)
       .then(response => response.json())
       .then(data => {
-        const decodedQuestions = data.results.map(question => {
-          const decodedQuestion = {
-            ...question,
-            question: decodeURIComponent(question.question),
-            correct_answer: decodeURIComponent(question.correct_answer),
-            incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer))
-          };
-          return decodedQuestion;
-        });
-        setQuestions(decodedQuestions);
+        if (data.results) { 
+          const decodedQuestions = data.results.map(question => {
+            const decodedQuestion = {
+              ...question,
+              question: decodeURIComponent(question.question),
+              correct_answer: decodeURIComponent(question.correct_answer),
+              incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer))
+            };
+            return decodedQuestion;
+          });
+          setQuestions(decodedQuestions);
+        } else {
+          navigation.navigate('Home');
+        }
       })
       .catch(error => console.error('Error : ', error));
   }, [difficulty, category]);
+  
+  
+
+
+
 
   const handleAnswer = (answer) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -77,6 +87,7 @@ const QuizScreen = ({ route, navigation }) => {
       <Text style={styles.score}>Score : {score}</Text>
       <Text style={styles.category}>Selected category : {categoryName}</Text>
       <Text style={styles.difficulty}>Selected difficulty : {difficulty ? difficulty : "All"}</Text>
+      <Text style={styles.questionCount}>{currentQuestionIndex + 1}/{questions.length}</Text>
       {questions.length > 0 && renderQuestion()}
     </View>
   );  
@@ -88,40 +99,52 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#f0f0f0', 
   },
   score: {
-    fontSize: 18,
+    fontSize: 20, 
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 15, 
+    textAlign: 'center', 
   },
   category: {
-    fontSize: 16,
+    fontSize: 18, 
     marginBottom: 10,
+    textAlign: 'center',
   },
   difficulty: {
-    fontSize: 16,
+    fontSize: 18, 
     marginBottom: 20,
+    textAlign: 'center', 
   },
   questionContainer: {
     alignItems: 'center',
   },
   question: {
-    fontSize: 20,
+    fontSize: 22,
     marginBottom: 20,
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#007bff', 
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    marginBottom: 10,
+    marginBottom: 15,
+    width: '100%', 
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
     textAlign: 'center',
   },
+  questionCount: {
+    fontSize: 18,
+    marginBottom: 15, 
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }  
 });
+
 
 export default QuizScreen;

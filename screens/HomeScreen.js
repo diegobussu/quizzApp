@@ -48,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
         </>
       )}
       <TouchableOpacity style={styles.button} onPress={startQuizz}>
-        <Text style={styles.buttonText}>Start Quizz</Text>
+        <Text style={styles.buttonText}>Start</Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,27 +60,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#f0f0f0',
   },
   title: {
-    fontSize: 20,
+    fontSize: 24, 
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+    textAlign: 'center',
   },
   picker: {
     width: '100%',
-    marginBottom: 20,
+    marginBottom: 30, 
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
   },
   button: {
-    backgroundColor: '#000',
-    borderRadius: 10,
-    paddingHorizontal: 20,
+    backgroundColor: '#007bff',
+    borderRadius: 20,
+    paddingHorizontal: 30,
     paddingVertical: 15,
+    elevation: 2,
   },
   buttonText: {
     color: '#fff',
     fontSize: 20,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
 });
+
 
 export default HomeScreen;
