@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
 const QuizScreen = ({ route, navigation }) => {
   const { difficulty, category } = route.params;
@@ -13,21 +13,21 @@ const QuizScreen = ({ route, navigation }) => {
       .then(response => response.json())
       .then(data => {
         const selectedCategory = data.trivia_categories.find(cat => cat.id.toString() === category);
-        setCategoryName(decodeURIComponent(selectedCategory.name)); // Décode le nom de la catégorie
+        setCategoryName(decodeURIComponent(selectedCategory.name));
       })
       .catch(error => console.error('Error : ', error));
   }, [category]);
 
   useEffect(() => {
-    fetch(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=10&encode=url3986&category=${category}&difficulty=${difficulty}&type=multiple`)
       .then(response => response.json())
       .then(data => {
         const decodedQuestions = data.results.map(question => {
           const decodedQuestion = {
             ...question,
-            question: decodeURIComponent(question.question), // Décode la question
-            correct_answer: decodeURIComponent(question.correct_answer), // Décode la réponse correcte
-            incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer)) // Décode les réponses incorrectes
+            question: decodeURIComponent(question.question),
+            correct_answer: decodeURIComponent(question.correct_answer),
+            incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer))
           };
           return decodedQuestion;
         });
@@ -48,7 +48,7 @@ const QuizScreen = ({ route, navigation }) => {
         'Quizz Terminé',
         `Votre score est de ${score}/${questions.length}`,
         [
-          { text: 'OK', onPress: () => navigation.navigate('Welcome') } // Rediriger l'utilisateur lorsque OK est appuyé
+          { text: 'OK', onPress: () => navigation.navigate('Welcome') }
         ],
         { cancelable: false }
       );
@@ -61,9 +61,13 @@ const QuizScreen = ({ route, navigation }) => {
       <View style={styles.questionContainer}>
         <Text style={styles.question}>{currentQuestion.question}</Text>
         {currentQuestion.incorrect_answers.map((answer, index) => (
-          <Button key={index} title={answer} onPress={() => handleAnswer(answer)} style={styles.button} />
+          <TouchableOpacity key={index} style={styles.button} onPress={() => handleAnswer(answer)}>
+            <Text style={styles.buttonText}>{answer}</Text>
+          </TouchableOpacity>
         ))}
-        <Button title={currentQuestion.correct_answer} onPress={() => handleAnswer(currentQuestion.correct_answer)} style={styles.button} />
+        <TouchableOpacity style={styles.button} onPress={() => handleAnswer(currentQuestion.correct_answer)}>
+          <Text style={styles.buttonText}>{currentQuestion.correct_answer}</Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -72,10 +76,10 @@ const QuizScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <Text style={styles.score}>Score : {score}</Text>
       <Text style={styles.category}>Selected category : {categoryName}</Text>
-      <Text style={styles.difficulty}>Selected difficulty : {difficulty}</Text>
+      <Text style={styles.difficulty}>Selected difficulty : {difficulty ? difficulty : "All"}</Text>
       {questions.length > 0 && renderQuestion()}
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
@@ -107,7 +111,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
+    backgroundColor: '#000',
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     marginBottom: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 
