@@ -17,6 +17,11 @@ or
 ```bash
 yarn install 
 ```
+and 
+
+```bash
+npm start 
+```
 
 ## Dependencies
 
