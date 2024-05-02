@@ -15,7 +15,7 @@ const QuizScreen = ({ route, navigation }) => {
         const selectedCategory = data.trivia_categories.find(cat => cat.id.toString() === category);
         setCategoryName(selectedCategory.name);
       })
-      .catch(error => console.error('Error fetching categories:', error));
+      .catch(error => console.error('Error : ', error));
   }, [category]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const QuizScreen = ({ route, navigation }) => {
       .then(data => {
         setQuestions(data.results);
       })
-      .catch(error => console.error('Error fetching questions:', error));
+      .catch(error => console.error('Error : ', error));
   }, [difficulty, category]);
 
   const handleAnswer = (answer) => {
@@ -35,9 +35,8 @@ const QuizScreen = ({ route, navigation }) => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Afficher une alerte à la fin du Quizz
       Alert.alert(
-        'Quiz Terminé',
+        'Quizz Terminé',
         `Votre score est de ${score}/${questions.length}`,
         [
           { text: 'OK', onPress: () => navigation.goBack() } // Rediriger l'utilisateur lorsque OK est appuyé
@@ -62,6 +61,7 @@ const QuizScreen = ({ route, navigation }) => {
 
   return (
     <View>
+      <Text>Score : {score}</Text>
       <Text>Selected category : {categoryName}</Text>
       <Text>Selected difficulty : {difficulty}</Text>
       {questions.length > 0 && renderQuestion()}
