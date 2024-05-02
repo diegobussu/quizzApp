@@ -23,6 +23,3 @@ and
 npm start 
 ```
 
-## Dependencies
-
-
