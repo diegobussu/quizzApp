@@ -18,23 +18,33 @@ const QuizScreen = ({ route, navigation }) => {
       .catch(error => console.error('Error : ', error));
   }, [category]);
 
+  
   useEffect(() => {
     fetch(`https://opentdb.com/api.php?amount=10&encode=url3986&category=${category}&difficulty=${difficulty}&type=multiple`)
       .then(response => response.json())
       .then(data => {
-        const decodedQuestions = data.results.map(question => {
-          const decodedQuestion = {
-            ...question,
-            question: decodeURIComponent(question.question),
-            correct_answer: decodeURIComponent(question.correct_answer),
-            incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer))
-          };
-          return decodedQuestion;
-        });
-        setQuestions(decodedQuestions);
+        if (data.results) { 
+          const decodedQuestions = data.results.map(question => {
+            const decodedQuestion = {
+              ...question,
+              question: decodeURIComponent(question.question),
+              correct_answer: decodeURIComponent(question.correct_answer),
+              incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer))
+            };
+            return decodedQuestion;
+          });
+          setQuestions(decodedQuestions);
+        } else {
+          navigation.navigate('Home');
+        }
       })
       .catch(error => console.error('Error : ', error));
   }, [difficulty, category]);
+  
+  
+
+
+
 
   const handleAnswer = (answer) => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -77,6 +87,7 @@ const QuizScreen = ({ route, navigation }) => {
       <Text style={styles.score}>Score : {score}</Text>
       <Text style={styles.category}>Selected category : {categoryName}</Text>
       <Text style={styles.difficulty}>Selected difficulty : {difficulty ? difficulty : "All"}</Text>
+      <Text style={styles.questionCount}>{currentQuestionIndex + 1}/{questions.length}</Text>
       {questions.length > 0 && renderQuestion()}
     </View>
   );  
@@ -122,6 +133,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  questionCount: {
+    fontSize: 16,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  }  
 });
 
 export default QuizScreen;
