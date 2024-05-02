@@ -13,7 +13,7 @@ const QuizScreen = ({ route, navigation }) => {
       .then(response => response.json())
       .then(data => {
         const selectedCategory = data.trivia_categories.find(cat => cat.id.toString() === category);
-        setCategoryName(selectedCategory.name);
+        setCategoryName(decodeURIComponent(selectedCategory.name)); // Décode le nom de la catégorie
       })
       .catch(error => console.error('Error : ', error));
   }, [category]);
@@ -22,7 +22,16 @@ const QuizScreen = ({ route, navigation }) => {
     fetch(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`)
       .then(response => response.json())
       .then(data => {
-        setQuestions(data.results);
+        const decodedQuestions = data.results.map(question => {
+          const decodedQuestion = {
+            ...question,
+            question: decodeURIComponent(question.question), // Décode la question
+            correct_answer: decodeURIComponent(question.correct_answer), // Décode la réponse correcte
+            incorrect_answers: question.incorrect_answers.map(answer => decodeURIComponent(answer)) // Décode les réponses incorrectes
+          };
+          return decodedQuestion;
+        });
+        setQuestions(decodedQuestions);
       })
       .catch(error => console.error('Error : ', error));
   }, [difficulty, category]);
