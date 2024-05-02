@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
         selectedValue={difficulty}
         onValueChange={(itemValue) => setDifficulty(itemValue)}
       >
-        <Picker.Item label="All" value="" />
+        <Picker.Item label="All" value="all" />
         <Picker.Item label="Easy" value="easy" />
         <Picker.Item label="Medium" value="medium" />
         <Picker.Item label="Hard" value="hard" />

@@ -76,10 +76,10 @@ const QuizScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <Text style={styles.score}>Score : {score}</Text>
       <Text style={styles.category}>Selected category : {categoryName}</Text>
-      <Text style={styles.difficulty}>Selected difficulty : {difficulty}</Text>
+      <Text style={styles.difficulty}>Selected difficulty : {difficulty ? difficulty : "All"}</Text>
       {questions.length > 0 && renderQuestion()}
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({

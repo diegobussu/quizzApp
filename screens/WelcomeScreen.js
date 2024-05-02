@@ -13,7 +13,7 @@ const WelcomeScreen = ({ navigation }) => {
     >
       <View style={styles.overlay}>
         <View style={styles.container}>
-          <Text style={styles.title}>Welcome to the Quiz App !</Text>
+          <Text style={styles.title}>Welcome to the Quizz App !</Text>
           <Text style={styles.subtitle}>Are you ready to challenge your knowledge ?</Text>
           <TouchableOpacity style={styles.button} onPress={startQuizz}>
             <Text style={styles.buttonText}>Start</Text>
