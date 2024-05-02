@@ -11,7 +11,7 @@ const WelcomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to the Quizz App !</Text>
       <Text style={styles.subtitle}>Are you ready to challenge your knowledge ?</Text>
-      <Button title="Start Quizz" onPress={startQuizz} />
+      <Button title="Start" onPress={startQuizz} />
     </View>
   );
 };

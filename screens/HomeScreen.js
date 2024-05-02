@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const HomeScreen = ({ navigation }) => {
-  const [difficulty, setDifficulty] = useState('easy');
+  const [difficulty, setDifficulty] = useState('');
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('9'); // Par défault on sélectionne la catégorie générale
 
@@ -28,6 +28,7 @@ const HomeScreen = ({ navigation }) => {
         selectedValue={difficulty}
         onValueChange={(itemValue) => setDifficulty(itemValue)}
       >
+        <Picker.Item label="All" value="" />
         <Picker.Item label="Easy" value="easy" />
         <Picker.Item label="Medium" value="medium" />
         <Picker.Item label="Hard" value="hard" />
@@ -46,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
           </Picker>
         </>
       )}
-      <Button title="Start Quiz" onPress={startQuizz} />
+      <Button title="Start Quizz" onPress={startQuizz} />
     </View>
   );
 };
